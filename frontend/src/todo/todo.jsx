@@ -23,14 +23,14 @@ export default class Todo extends Component {
     handleRemove(todo){
         axios.delete(`${URL}/${todo._id}`)
         .then(resp => this.refresh(this.state.description))
-        .catch(() => { console.log('Erro ao recuperar os dados') })
+        .catch(() => { console.log('Error to recover data.') })
     }
 
     refresh(description = '') {
         const search = description ? `&description__regex=/${description}/`: ''
         axios.get(`${URL}?sort=-createdAt${search}`)
         .then(resp => this.setState({...this.state, description, list: resp.data}))
-        .catch(() => { console.log('Erro ao recuperar os dados') })
+        .catch(() => { console.log('Error to recover data.') })
     }
 
     handleSearch(){
@@ -44,19 +44,19 @@ export default class Todo extends Component {
         const description = this.state.description
         axios.post(URL, { description })
         .then(resp => this.refresh())
-        .catch(() => { console.log('Erro ao recuperar os dados') })
+        .catch(() => { console.log('Error to recover data.') })
     }
 
     handleMarkAsDone(todo) {
         axios.put(`${URL}/${todo._id}`,{...todo, done: true})
         .then(resp => this.refresh(this.state.description))
-        .catch(() => { console.log('Erro ao recuperar os dados') })
+        .catch(() => { console.log('Error to recover data.') })
     }
 
     handleMarkAsPending(todo) {
         axios.put(`${URL}/${todo._id}`, {...todo, done: false})
         .then(resp => this.refresh(this.state.description))
-        .catch(() => { console.log('Erro ao recuperar os dados') })
+        .catch(() => { console.log('Error to recover data.') })
     }
 
     handleClear(){
